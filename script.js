@@ -1,6 +1,44 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-  // 1. Initial Page Load Animations
+  // 1. Mobile Menu Toggle
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const iconMenu = document.querySelector(".icon-menu");
+  const iconClose = document.querySelector(".icon-close");
+
+  if (mobileMenuBtn && mobileMenu) {
+    mobileMenuBtn.addEventListener("click", () => {
+      const isExpanded = mobileMenuBtn.getAttribute("aria-expanded") === "true";
+      
+      if (!isExpanded) {
+        mobileMenu.classList.add("is-active");
+        mobileMenuBtn.setAttribute("aria-expanded", "true");
+        iconMenu.style.display = "none";
+        iconClose.style.display = "block";
+        document.body.style.overflow = "hidden"; // Prevent scrolling when menu is open
+      } else {
+        mobileMenu.classList.remove("is-active");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        iconMenu.style.display = "block";
+        iconClose.style.display = "none";
+        document.body.style.overflow = "";
+      }
+    });
+
+    // Close menu when clicking a link
+    const mobileLinks = mobileMenu.querySelectorAll(".nav-link, .btn-mobile-cta");
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.remove("is-active");
+        mobileMenuBtn.setAttribute("aria-expanded", "false");
+        iconMenu.style.display = "block";
+        iconClose.style.display = "none";
+        document.body.style.overflow = "";
+      });
+    });
+  }
+
+  // 2. Initial Page Load Animations
   setTimeout(() => {
     // Navbar fade in
     gsap.to(".navbar", {
@@ -49,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, 100);
 
-  // 2. Product Demo Loop Animation
+  // 3. Product Demo Loop Animation
   function initDemoAnimation() {
     // Only run on desktop/tablet where cursor is visible
     if (window.innerWidth <= 768) return;
@@ -126,7 +164,8 @@ document.addEventListener("DOMContentLoaded", () => {
         y: -5, 
         duration: 0.3, 
         onComplete: () => {
-          document.getElementById("streak-text").innerText = "13 day streak";
+          const streakText = document.getElementById("streak-text");
+          if(streakText) streakText.innerText = "13 day streak";
         }
       }, "+=0.2")
       .set("#streak-text", { y: 5 })
