@@ -1,0 +1,287 @@
+.container {
+  background: var(--bg);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.header {
+  text-align: center;
+  padding: 120px 20px 80px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.headerTitle {
+  font-size: var(--text-section-heading);
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: #fff;
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.headerSubtitle {
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.pinContainer {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 75vw;
+  max-width: 1200px;
+  height: auto;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  padding: 0;
+}
+
+.cardContent {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+}
+
+.textSection {
+  flex: 1;
+}
+
+.num {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 500;
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.title {
+  font-size: var(--text-card-title);
+  font-weight: 500;
+  letter-spacing: -1px;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 20px;
+}
+
+.desc {
+  font-size: var(--text-card-desc);
+  color: rgba(255, 255, 255, 0.45);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.visualSection {
+  flex: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.frame {
+  background: var(--surface);
+  border: 0.5px solid var(--border-light);
+  border-radius: 16px;
+  padding: 32px;
+  width: 100%;
+  max-width: 480px;
+}
+
+/* Specific Visuals */
+.streakcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 30px;
+}
+
+.flame {
+  font-size: 64px;
+}
+
+.streaknum {
+  font-size: 56px;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.streaklabel {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.calmini {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+}
+
+.dcell {
+  aspect-ratio: 1;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.25);
+  transition: all 0.2s ease;
+}
+
+.dcell.hi {
+  background: rgba(232, 130, 60, 0.18);
+  color: var(--accent);
+}
+
+.reflectbox {
+  padding: 20px 0;
+}
+
+.rq {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.4);
+  margin-bottom: 16px;
+}
+
+.rtext {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.focusbox {
+  text-align: center;
+  padding: 40px 10px;
+}
+
+.focustask {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 32px;
+}
+
+.focusring {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 2px solid rgba(249, 115, 22, 0.15);
+  border-top-color: var(--accent);
+  margin: 0 auto;
+}
+
+.heat {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 6px;
+}
+
+.hcell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.zerolist {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.zitem {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.3);
+  text-decoration: line-through;
+}
+
+.particles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .card {
+    width: 90vw;
+  }
+  .cardContent {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 90vw;
+    min-height: auto;
+  }
+  
+  .cardContent {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  
+  .desc {
+    margin: 0 auto;
+    max-width: 100%;
+  }
+  
+  .visualSection {
+    width: 100%;
+  }
+  
+  .frame {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 425px) {
+  .card {
+    width: 92vw;
+  }
+  .frame {
+    padding: 20px;
+  }
+  .streakcard {
+    padding: 16px;
+  }
+  .flame {
+    font-size: 48px;
+  }
+  .streaknum {
+    font-size: 42px;
+  }
+  .focusring {
+    width: 90px;
+    height: 90px;
+  }
+}

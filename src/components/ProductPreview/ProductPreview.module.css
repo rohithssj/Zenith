@@ -1,0 +1,358 @@
+.previewSection {
+  padding: 0 2rem 8rem;
+  display: flex;
+  justify-content: center;
+  margin-top: -6rem;
+  position: relative;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+}
+
+.glowEffect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1000px, 100vw);
+  height: min(800px, 100vw);
+  background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+  opacity: 0.05;
+  filter: blur(120px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.previewContainer {
+  max-width: 960px;
+  width: 100%;
+}
+
+.browserFrame {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.4);
+}
+
+.browserHeader {
+  height: 48px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 1.25rem;
+}
+
+.browserDots {
+  display: flex;
+  gap: 8px;
+}
+
+.browserDots span {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--border-light);
+}
+
+.appUi {
+  display: flex;
+  height: 540px;
+  background: var(--bg);
+  position: relative;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 260px;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5rem 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+  flex-shrink: 0;
+}
+
+.sidebarNav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-height: 48px;
+}
+
+.navItem.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-primary);
+}
+
+.navText {
+  display: inline-block;
+}
+
+.streakBadge {
+  margin-top: auto;
+  border: 1px solid rgba(249, 115, 22, 0.15);
+  background: rgba(249, 115, 22, 0.06);
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: max-content;
+  position: relative;
+  overflow: hidden;
+  min-height: 48px;
+}
+
+.fireIcon {
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+}
+
+.streakCount {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--accent);
+  position: relative;
+  z-index: 2;
+}
+
+.emberContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ember {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: var(--accent-light);
+  border-radius: 50%;
+  bottom: 5px;
+  left: 20px;
+  opacity: 0;
+  filter: blur(1px);
+}
+
+/* Main Content */
+.mainContent {
+  flex: 1;
+  padding: 3.5rem 4rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.mainHeader {
+  margin-bottom: 2rem;
+  flex-shrink: 0;
+}
+
+.mainHeader h2 {
+  font-size: clamp(1.15rem, 3vw, 1.35rem);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.progressContainer {
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: var(--accent);
+  width: 50%;
+  transition: width 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Task List */
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: hidden;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  flex-shrink: 0;
+}
+
+.circle.filled {
+  background: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.circle.outline {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.taskText {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.taskItem.completed .taskText {
+  color: var(--text-secondary);
+}
+
+/* Demo Cursor */
+.demoCursor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+  transform-origin: top left;
+}
+
+/* Laptop / Small Desktop */
+@media (max-width: 1024px) {
+  .mainContent { padding: 3rem 2.5rem; }
+  .sidebar { width: 220px; padding: 2rem 1rem; }
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+  .previewSection { padding: 0 1.5rem 6rem; }
+  .appUi { height: 480px; }
+  .sidebar { width: 200px; padding: 1.5rem 1rem; }
+  .navItem { padding: 10px 12px; }
+  .mainContent { padding: 2.5rem 2rem; }
+}
+
+/* Large Mobile */
+@media (max-width: 600px) {
+  .previewSection {
+    padding: 0 1.25rem 4rem;
+    margin-top: -3rem;
+  }
+
+  .appUi {
+    flex-direction: column;
+    height: auto;
+    min-height: 480px;
+  }
+  
+  .sidebar {
+    width: 100%;
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  
+  .sidebar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .sidebarNav {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+  
+  .navItem {
+    padding: 8px 12px;
+  }
+  
+  .navText {
+    display: none;
+  }
+  
+  .streakBadge {
+    margin-top: 0;
+    margin-left: 1rem;
+    padding: 8px 12px;
+  }
+  
+  .streakCount {
+    font-size: 0.8rem;
+  }
+  
+  .mainContent {
+    padding: 1.5rem 1rem;
+  }
+  
+  .taskItem {
+    padding: 14px 16px;
+    gap: 12px;
+  }
+  
+  .circle {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .taskText {
+    font-size: 0.875rem;
+  }
+  
+  .demoCursor {
+    display: none;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 375px) {
+  .previewSection { padding: 0 1rem 3rem; }
+  .taskItem { padding: 12px 14px; gap: 10px; }
+  .sidebar { padding: 1rem 0.5rem; }
+}
+
+@media (max-width: 320px) {
+  .streakCount { display: none; }
+  .streakBadge { padding: 8px; }
+}
