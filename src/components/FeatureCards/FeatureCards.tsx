@@ -1,12 +1,15 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import styles from './FeatureCards.module.css';
+import AtmosphereEngine from './AtmosphereEngine';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const FeatureCards: React.FC = () => {
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const activeIndexRef = useRef(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const pinRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
@@ -34,35 +37,61 @@ const FeatureCards: React.FC = () => {
       scrollTrigger: {
         trigger: pinRef.current,
         start: 'top top',
-        end: `+=${totalCards * 120}%`,
+        end: `+=${totalCards * 90}%`,
         pin: true,
         scrub: 1,
         anticipatePin: 1,
+        onUpdate: (self) => {
+          if (self.progress < 0.01) {
+            if (activeIndexRef.current !== -1) {
+              activeIndexRef.current = -1;
+              setActiveIndex(-1);
+            }
+            return;
+          }
+          
+          let newIndex = Math.floor((self.progress * totalCards) + 0.1); 
+          if (newIndex >= totalCards) newIndex = totalCards - 1;
+          if (newIndex < 0) newIndex = 0;
+          
+          if (newIndex !== activeIndexRef.current) {
+            activeIndexRef.current = newIndex;
+            setActiveIndex(newIndex);
+          }
+        }
       }
     });
 
-    // Make the first card visible immediately in the timeline
-    gsap.set(cardsRef.current[0], { autoAlpha: 1, scale: 1, y: 0, filter: 'blur(0px)' });
-
     // Build the crossfade sequence
     cardsRef.current.forEach((card, i) => {
-      if (i > 0) {
+      if (i === 0) {
+        gsap.set(card, { autoAlpha: 0, scale: 0.98, y: 40, filter: 'blur(0px)' });
+        tl.to(card, {
+          autoAlpha: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 1,
+          ease: 'power2.out',
+        });
+      } else {
         // Prepare next card
         gsap.set(card, { autoAlpha: 0, scale: 0.98, y: 40, filter: 'blur(0px)' });
         
         // Pause to let the user read the current card before transitioning
-        tl.to({}, { duration: 0.5 });
+        tl.to({}, { duration: 0.2 });
         
         // Transition: Fade out previous card
         tl.to(cardsRef.current[i - 1], {
           autoAlpha: 0,
           y: -40,
-          filter: 'blur(8px)', // Blur slightly while exiting
+          scale: 0.98,
+          filter: 'blur(8px)',
           duration: 1,
           ease: 'power2.inOut',
-        }, `+=${0.1}`);
+        }, `+=${0.05}`);
 
-        // Transition: Fade in current card (overlapping with previous card fading out)
+        // Transition: Fade in current card (overlapping)
         tl.to(card, {
           autoAlpha: 1,
           y: 0,
@@ -70,12 +99,12 @@ const FeatureCards: React.FC = () => {
           filter: 'blur(0px)',
           duration: 1,
           ease: 'power2.inOut',
-        }, '<0.3'); // Start slightly after the previous card begins fading
+        }, '<0.2');
       }
     });
     
-    // Final pause so the last card stays on screen for a moment
-    tl.to({}, { duration: 0.8 });
+    // Final pause
+    tl.to({}, { duration: 0.4 });
     
   }, { scope: containerRef });
 
@@ -122,10 +151,10 @@ const FeatureCards: React.FC = () => {
       </div>
 
       <div className={styles.pinContainer} ref={pinRef}>
+        <AtmosphereEngine activeIndex={activeIndex} />
         
         {/* CARD 01 - Streak */}
         <div className={styles.card} ref={(el) => (cardsRef.current[0] = el)}>
-          <BackgroundParticles type="streak" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>01 — streak system</div>
@@ -146,7 +175,6 @@ const FeatureCards: React.FC = () => {
 
         {/* CARD 02 - Calendar */}
         <div className={styles.card} ref={(el) => (cardsRef.current[1] = el)}>
-          <BackgroundParticles type="calendar" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>02 — story calendar</div>
@@ -172,7 +200,6 @@ const FeatureCards: React.FC = () => {
 
         {/* CARD 03 - Reflection */}
         <div className={styles.card} ref={(el) => (cardsRef.current[2] = el)}>
-          <BackgroundParticles type="reflect" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>03 — daily reflection</div>
@@ -192,7 +219,6 @@ const FeatureCards: React.FC = () => {
 
         {/* CARD 04 - Focus */}
         <div className={styles.card} ref={(el) => (cardsRef.current[3] = el)}>
-          <BackgroundParticles type="focus" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>04 — focus mode</div>
@@ -212,7 +238,6 @@ const FeatureCards: React.FC = () => {
 
         {/* CARD 05 - Heatmap */}
         <div className={styles.card} ref={(el) => (cardsRef.current[4] = el)}>
-          <BackgroundParticles type="heatmap" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>05 — heatmap</div>
@@ -239,7 +264,6 @@ const FeatureCards: React.FC = () => {
 
         {/* CARD 06 - Zero Complexity */}
         <div className={styles.card} ref={(el) => (cardsRef.current[5] = el)}>
-          <BackgroundParticles type="zero" />
           <div className={styles.cardContent}>
             <div className={styles.textSection}>
               <div className={styles.num}>06 — zero complexity</div>
@@ -262,60 +286,6 @@ const FeatureCards: React.FC = () => {
 
       </div>
     </section>
-  );
-};
-
-// Extracted Particle Component to keep things clean
-const BackgroundParticles: React.FC<{ type: string }> = ({ type }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  
-  const config: Record<string, { color: string, count: number }> = {
-    streak: { color: 'rgba(249,115,22,0.3)', count: 12 },
-    calendar: { color: 'rgba(255,255,255,0.2)', count: 10 },
-    reflect: { color: 'rgba(249,115,22,0.25)', count: 10 },
-    focus: { color: 'rgba(249,115,22,0.35)', count: 5 },
-    heatmap: { color: 'rgba(249,115,22,0.3)', count: 16 },
-    zero: { color: 'rgba(255,255,255,0.1)', count: 4 },
-  };
-  
-  const settings = config[type] || config.zero;
-
-  useGSAP(() => {
-    if (!containerRef.current) return;
-    const particles = containerRef.current.children;
-    
-    Array.from(particles).forEach((p) => {
-      gsap.to(p, {
-        y: '-=30',
-        duration: 6 + Math.random() * 6,
-        repeat: -1,
-        yoyo: true,
-        ease: 'sine.inOut',
-        delay: Math.random() * -5
-      });
-    });
-  }, { scope: containerRef });
-
-  return (
-    <div className={styles.particles} ref={containerRef}>
-      {Array.from({ length: settings.count }).map((_, i) => {
-        const size = 2 + Math.random() * 4;
-        return (
-          <div 
-            key={i} 
-            className={styles.particle} 
-            style={{
-              width: size,
-              height: size,
-              background: settings.color,
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              opacity: 0.15 + Math.random() * 0.35
-            }}
-          />
-        );
-      })}
-    </div>
   );
 };
 
