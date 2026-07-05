@@ -1,0 +1,267 @@
+.section {
+  /* No static background color here; we will handle it via a transition element */
+  background-color: transparent;
+  padding: 140px 0 8rem 0; /* 140px top padding as requested */
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.sectionBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #101010;
+  opacity: 0; /* JS will fade this in from 0->1 */
+  z-index: -1;
+  pointer-events: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 80px; /* 80px breathing room before pinning */
+  width: 100%;
+  opacity: 0; /* GSAP entrance */
+  transform: translateY(40px); /* GSAP entrance */
+  position: relative;
+  z-index: 10;
+}
+
+.headline {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+
+.subtitle {
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Pinned track */
+.pinContainer {
+  width: 100%;
+  position: relative;
+  /* Height will be driven by the cards */
+}
+
+/* Mobile defaults (no JS needed for horizontal scroll) */
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.cardWrapper {
+  width: 100%;
+  position: relative;
+  opacity: 1; /* GSAP will control this */
+}
+
+.card {
+  background: var(--bg);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 24px;
+  padding: 4rem;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  /* Glow will be controlled by GSAP, default static shadow: */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  will-change: transform, opacity, filter, box-shadow;
+  transform-origin: center center;
+}
+
+.cardContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stepNum {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cardTitle {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.cardDesc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+.cardPreview {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Progress indicator */
+.progressIndicator {
+  display: none;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .section {
+    padding-bottom: 0;
+  }
+  
+  .cardsContainer {
+    position: relative;
+    width: 100%;
+    height: 620px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0 auto;
+  }
+  
+  .cardWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden; /* autoAlpha will manage this */
+    opacity: 0;
+  }
+  
+  .cardWrapper:first-child {
+    visibility: visible;
+    opacity: 1;
+  }
+  
+  .card {
+    grid-template-columns: 1fr 1fr;
+    width: min(1100px, 88vw);
+    height: 620px;
+    /* initial state for GSAP to animate from */
+    transform-style: preserve-3d; 
+  }
+  
+  .progressIndicator {
+    display: flex;
+    position: relative;
+    justify-content: center;
+    margin-top: 60px;
+    padding-bottom: 60px; /* Some padding at the bottom of the pinned area */
+    z-index: 10;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .progressDot {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+  }
+  
+  .progressDot.active {
+    color: var(--accent);
+  }
+  
+  .progressLine {
+    width: 24px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 1px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .progressLineInner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+  }
+}
+
+/* Previews UI */
+.authForm {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+.authTitle {
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inputGroup label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.inputGroup input {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 12px 16px;
+  border-radius: 8px;
+  color: var(--text-primary);
+  font-family: inherit;
+  outline: none;
+}
+
+.authBtn {
+  background: var(--text-primary);
+  color: #0A0A0A;
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.streakTimeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-top: 2rem;
+  height: 40px;
+}

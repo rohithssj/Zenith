@@ -1,8 +1,15 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import { Calendar, LayoutGrid, Target, LineChart } from 'lucide-react';
-import styles from './ProductPreview.module.css';
+import styles from '../ProductUI/ProductUI.module.css';
+import { 
+  BrowserFrame, 
+  Sidebar, 
+  StreakBadge, 
+  DashboardHeader, 
+  TaskList, 
+  TaskCard 
+} from '../ProductUI';
 
 const ProductPreview: React.FC = () => {
   const previewRef = useRef<HTMLDivElement>(null);
@@ -21,7 +28,6 @@ const ProductPreview: React.FC = () => {
 
     // 2. Continuous Loop Animation
     function initDemoAnimation() {
-      // Only run on desktop/tablet where cursor is visible
       if (window.innerWidth <= 768) return;
       
       const getPos = (id: string) => {
@@ -110,83 +116,25 @@ const ProductPreview: React.FC = () => {
     <section className={styles.previewSection} ref={previewRef}>
       <div className={styles.glowEffect}></div>
       <div className={styles.previewContainer}>
-        <div className={styles.browserFrame}>
-          <div className={styles.browserHeader}>
-            <div className={styles.browserDots}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+        <BrowserFrame>
+          <Sidebar>
+            <StreakBadge streak={12} />
+          </Sidebar>
+          <main className={styles.mainContent}>
+            <DashboardHeader title="Good morning, Rohith" progress={50} />
+            <TaskList>
+              <TaskCard text="Morning revision — DSA" completed={true} />
+              <TaskCard text="Push Zanki landing page" completed={true} />
+              <TaskCard text="Review PRD and update roadmap" id="task-3" circleId="circle-3" />
+              <TaskCard text="30 min evening walk" id="task-4" circleId="circle-4" />
+            </TaskList>
+          </main>
+          <div className={`${styles.demoCursor} demo-cursor`}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#FAFAFA" stroke="#000000" strokeWidth="1.5">
+              <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L5.85 2.86a.5.5 0 0 0-.85.35Z"></path>
+            </svg>
           </div>
-          
-          <div className={styles.appUi}>
-            <aside className={styles.sidebar}>
-              <nav className={styles.sidebarNav}>
-                <div className={`${styles.navItem} ${styles.active}`} aria-label="Today">
-                  <LayoutGrid size={20} />
-                  <span className={styles.navText}>Today</span>
-                </div>
-                <div className={styles.navItem} aria-label="Calendar">
-                  <Calendar size={20} />
-                  <span className={styles.navText}>Calendar</span>
-                </div>
-                <div className={styles.navItem} aria-label="Focus">
-                  <Target size={20} />
-                  <span className={styles.navText}>Focus</span>
-                </div>
-                <div className={styles.navItem} aria-label="Insights">
-                  <LineChart size={20} />
-                  <span className={styles.navText}>Insights</span>
-                </div>
-              </nav>
-
-              <div className={styles.streakBadge} id="streak-badge">
-                <span className={styles.fireIcon}>🔥</span>
-                <span className={styles.streakCount} id="streak-text">12 day streak</span>
-                <div className={styles.emberContainer} id="ember-container">
-                  <div className={`${styles.ember} ember`}></div>
-                  <div className={`${styles.ember} ember`}></div>
-                  <div className={`${styles.ember} ember`}></div>
-                  <div className={`${styles.ember} ember`}></div>
-                </div>
-              </div>
-            </aside>
-
-            <main className={styles.mainContent}>
-              <header className={styles.mainHeader}>
-                <h2>Good morning, Rohith</h2>
-                <div className={styles.progressContainer}>
-                  <div className={`${styles.progressBar} progress-bar`}></div>
-                </div>
-              </header>
-
-              <div className={styles.taskList}>
-                <div className={`${styles.taskItem} ${styles.completed}`}>
-                  <div className={`${styles.circle} ${styles.filled}`}></div>
-                  <span className={styles.taskText}>Morning revision — DSA</span>
-                </div>
-                <div className={`${styles.taskItem} ${styles.completed}`}>
-                  <div className={`${styles.circle} ${styles.filled}`}></div>
-                  <span className={styles.taskText}>Push Zanki landing page</span>
-                </div>
-                <div className={styles.taskItem} id="task-3">
-                  <div className={`${styles.circle} ${styles.outline}`} id="circle-3"></div>
-                  <span className={styles.taskText}>Review PRD and update roadmap</span>
-                </div>
-                <div className={styles.taskItem} id="task-4">
-                  <div className={`${styles.circle} ${styles.outline}`} id="circle-4"></div>
-                  <span className={styles.taskText}>30 min evening walk</span>
-                </div>
-              </div>
-            </main>
-
-            <div className={`${styles.demoCursor} demo-cursor`}>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="#FAFAFA" stroke="#000000" strokeWidth="1.5">
-                <path d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87c.45 0 .67-.54.35-.85L5.85 2.86a.5.5 0 0 0-.85.35Z"></path>
-              </svg>
-            </div>
-          </div>
-        </div>
+        </BrowserFrame>
       </div>
     </section>
   );
