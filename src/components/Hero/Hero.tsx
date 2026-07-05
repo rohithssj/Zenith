@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
         </h1>
         
         <p className={`${styles.heroSubtitle} hero-subtitle`}>
-          Zenith is a productivity system built around one idea:<br />
+          Zanki is a productivity system built around one idea:<br />
           Consistency beats complexity.<br />
           No workspaces. No clutter. Just your work, every day.
         </p>

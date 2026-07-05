@@ -167,7 +167,7 @@ const ProductPreview: React.FC = () => {
                 </div>
                 <div className={`${styles.taskItem} ${styles.completed}`}>
                   <div className={`${styles.circle} ${styles.filled}`}></div>
-                  <span className={styles.taskText}>Push Zenith landing page</span>
+                  <span className={styles.taskText}>Push Zanki landing page</span>
                 </div>
                 <div className={styles.taskItem} id="task-3">
                   <div className={`${styles.circle} ${styles.outline}`} id="circle-3"></div>

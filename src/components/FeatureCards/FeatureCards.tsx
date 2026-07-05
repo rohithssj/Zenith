@@ -228,7 +228,7 @@ const FeatureCards: React.FC = () => {
             <div className={styles.visualSection}>
               <div className={styles.frame}>
                 <div className={styles.focusbox}>
-                  <div className={styles.focustask}>Push Zenith landing page</div>
+                  <div className={styles.focustask}>Push Zanki landing page</div>
                   <div className={styles.focusring} ref={focusRingRef}></div>
                 </div>
               </div>

@@ -1,6 +1,6 @@
-# Zenith Architecture and Design Guidelines
+# Zanki Architecture and Design Guidelines
 
-From this point onward, every page of Zenith should follow this architecture.
+From this point onward, every page of Zanki should follow this architecture.
 
 ## Tech Stack
 **Frontend:**
@@ -88,12 +88,12 @@ Every design decision should reinforce:
 
 ## Important Instructions
 - Do not generate generic SaaS components.
-- Every component should feel like it belongs to Zenith.
+- Every component should feel like it belongs to Zanki.
 - Maintain the same typography, spacing, animations, colors, and interaction style throughout the project.
 
 ---
 
-# Zenith — Landing Page Design Summary
+# Zanki — Landing Page Design Summary
 > Complete design reference for every section of the landing page.
 > Every decision here is locked. Follow this when building.
 
@@ -111,7 +111,7 @@ Every design decision should reinforce:
 **Behavior:** Sticky. Stays fixed at top during all scroll.
 **Background:** `rgba(10,10,10,0.85)` with `backdrop-filter: blur(8px)`
 **Border:** `0.5px solid rgba(255,255,255,0.08)` on the bottom only.
-**Left:** `Zenith` wordmark — Geist, 17px, weight 500, white.
+**Left:** `Zanki` wordmark — Geist, 17px, weight 500, white.
 **Center:** Nav links — `Features`, `How it works`, `Pricing`. 14px, `rgba(255,255,255,0.45)`. Hover to full white.
 **Right:** Single CTA button — `Get started`. Background `#FAFAFA`, color `#0A0A0A`, 13px, weight 500, `border-radius: 7px`, padding `9px 18px`.
 **Spacing:** `padding: 22px 48px` on desktop. Collapses to hamburger menu on mobile.
@@ -124,12 +124,12 @@ Build a streak
 that lasts."
 - 60px, weight 500, letter spacing `-2px`, line height `1.06`, color `#FAFAFA`. "streak" is colored `#F97316`.
 **Subheadline:**
-"Zenith is a productivity system built around one idea: consistency beats complexity. No workspaces, no clutter — just your work, every day."
+"Zanki is a productivity system built around one idea: consistency beats complexity. No workspaces, no clutter — just your work, every day."
 - 17px, `rgba(255,255,255,0.4)`, `line-height: 1.7`, `max-width: 480px`, centered.
 **CTA Row:**
 - Primary: `Start for free` (white bg, black text, 9px radius)
 - Ghost: `See how it works` (transparent, `rgba(255,255,255,0.45)` text, 0.5px border)
-**App Preview:** Browser-frame mockup of Zenith app. `border-radius: 16px`, `border: 0.5px solid rgba(255,255,255,0.1)`, `margin-top: 70px`.
+**App Preview:** Browser-frame mockup of Zanki app. `border-radius: 16px`, `border: 0.5px solid rgba(255,255,255,0.1)`, `margin-top: 70px`.
 
 ## Section 3 — Feature Cards
 **Mechanism:** Vertical scroll-snapping, full-screen panels. GSAP ScrollTrigger pins section. Contextual particle field per card.
@@ -154,9 +154,9 @@ that lasts."
 **Right (Stats card):** Mini heatmap on top. Stat rows: `v1.0`, `6` core features, `0` workspaces/AI.
 
 ## Section 6 — Comparison
-**Headline:** "Most apps ask you to manage more. Zenith asks you to do more."
+**Headline:** "Most apps ask you to manage more. Zanki asks you to do more."
 **Left Card (Others):** 6 rows of complex features, crossed out result: spend more time organizing.
-**Right Card (Zenith):** 6 rows of focused features, result: time goes toward work. Border: `0.5px solid rgba(232,130,60,0.3)`.
+**Right Card (Zanki):** 6 rows of focused features, result: time goes toward work. Border: `0.5px solid rgba(232,130,60,0.3)`.
 **Below:** Small browser-frame app preview showing Today page.
 
 ## Section 7 — Final CTA

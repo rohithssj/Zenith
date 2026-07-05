@@ -35,7 +35,7 @@ const Navbar: React.FC = () => {
     <nav className={styles.navbar}>
       <div className={styles.navContainer}>
         <div className={styles.navLeft}>
-          <a href="#" className={styles.logo}>Zenith</a>
+          <a href="#" className={styles.logo}>Zanki</a>
         </div>
         
         <ul className={styles.navLinks}>
